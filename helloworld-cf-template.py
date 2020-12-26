@@ -32,13 +32,13 @@ t.add_resource(ec2.SecurityGroup(
                                             IpProtocol="tcp",
                                                         FromPort="22",
                                                                     ToPort="22",
-                                                                                CidrIp="0.0.0.0/0",
+                                                                                CidrIp="218.48.76.232/32",
                                                                                         ),
                                     ec2.SecurityGroupRule(
                                                     IpProtocol="tcp",
                                                                 FromPort=ApplicationPort,
                                                                             ToPort=ApplicationPort,
-                                                                                        CidrIp="218.48.76.232/32",
+                                                                                        CidrIp="0.0.0.0/0",
                                                                                                 ),
                                         ],
                 ))
