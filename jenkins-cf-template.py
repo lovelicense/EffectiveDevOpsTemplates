@@ -31,7 +31,6 @@ from awacs.aws import (
         )
 from awacs.sts import AssumeRole
 
-ApplicationPort = "3000"
 
 t = Template()
 
