@@ -157,19 +157,13 @@ states = {
 
 for reservation in {"CPU", "Memory"}:
         for state, value in states.items():
-                    t.add_resource(Alarm( "{}ReservationToo{}".format(reservation, state),AlarmDescription="Alarm if {} reservation too {}".format(reservation,state),Namespace="AWS/ECS",MetricName="{}Reservation".format(reservation),Dimensions=[MetricDimension(
-                                                                                                                                Name="ClusterName",Value=Ref("ECSCluster")
-                                                                                                                                                                    ),
-                                                                                                                    ],
-                                                                                                Statistic="Average",
-                                                                                                            Period="60",
-                                                                                                                        EvaluationPeriods="1",
-                                                                                                                                    Threshold=value['threshold'],
+                    t.add_resource(Alarm( "{}ReservationToo{}".format(reservation, state),AlarmDescription="Alarm if {} reservation too {}".format(reservation,state),Namespace="AWS/ECS",MetricName="{}Reservation".format(reservation),Dimensions=[MetricDimension(Name="ClusterName",Value=Ref("ECSCluster") ), ], Statistic="Average",Period="60",EvaluationPeriods="1", Threshold=value['threshold'],
                                                                                                                                                 ComparisonOperator=value['operator'],
                                                                                                                                                             AlarmActions=[
                                                                                                                                                                                 Ref("{}{}".format(value['alarmPrefix'], reservation))]
                                                                                                                                                                     ))
-t.add_resource(ScalingPolicy(
+
+                    t.add_resource(ScalingPolicy(
                                             "{}{}".format(value['alarmPrefix'], reservation),
                                                         ScalingAdjustment=value['adjustment'],
                                                                     AutoScalingGroupName=Ref("ECSAutoScalingGroup"),
