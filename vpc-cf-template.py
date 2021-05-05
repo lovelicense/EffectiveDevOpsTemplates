@@ -65,7 +65,7 @@ t.add_resource(VPCGatewayAttachment(
 ))
 
 accessibility = ["Private", "Public"]
-names = ["A", "B", "C", "D"]
+names = ["A", "B", "C"]
 count = 0
 
 for a in accessibility:
@@ -87,7 +87,7 @@ for a in accessibility:
         t.add_resource(Subnet(
             "{}Subnet{}".format(a, n),
             VpcId=Ref("VPC"),
-            AvailabilityZone=Select(count % 4, GetAZs()),
+            AvailabilityZone=Select(count % 3, GetAZs()),
             CidrBlock=Sub("10.${{ClassB}}.{}.0/20".format(count * 16)),
             MapPublicIpOnLaunch="true" if a == "Public" else "false",
             Tags=Tags(
